@@ -40,7 +40,7 @@ Constraints:
 """
 
 # My second solution (0.22)
-
+class Solution:
     def canPair(self, nuns, k):
         if len(nuns)%2 == 1:
             return False
@@ -54,7 +54,27 @@ Constraints:
 	        return False
 	return True
 
-# With numpy (my first no valid solution)
+# Third solution (0.32) worst performance than the second.
+# I don't create all the possible keys, instead I create the minimum neccesary.
+class Solution:
+    def canPair(self, nuns, k):
+        if len(nuns)%2 == 1:
+            return False
+        rem_dict = {0:0}
+        for nun in nuns:
+            if rem_dict.get(nun%k) == None:
+                rem_dict[nun%k] = 1
+            else:
+                rem_dict[nun%k] += 1
+        if rem_dict[0]%2 == 1:
+            return False
+        for j in range(1,k//2):
+            if rem_dict.get(j) != rem_dict.get(k-j):
+                return False
+        return True
+
+
+# With numpy (first solution, no admissible)
 import numpy as np
 
 class Solution:
