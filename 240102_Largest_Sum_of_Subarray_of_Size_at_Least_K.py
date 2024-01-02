@@ -40,6 +40,36 @@ Constraints:
 -105 <= a[i] <= 105
 1 <= k <= n
 """
+#Second and right solution (0.43)
+class Solution():
+    def maxSumWithK(self,a, n, k):
+    
+        # To keep track of array element's left tail sum
+        max_left_tail_sum = [0] * n
+        max_left_tail_sum[0] = a[0]
+        curr_sum = max_left_tail_sum[0]
+        
+        for i in range(1, n):
+            curr_sum = max(a[i] + curr_sum, # There's a left tail of a[i] with positive element sum
+                           a[i] # Don't take left tail of a[i] into consideration for k-element subarray expansion
+                          )
+            
+            max_left_tail_sum[i] = curr_sum
+        
+        sum_k = sum(a[:k])
+        ans = sum_k # Suppose sum of first k elements subarray is the solution
+    
+        for i in range(k, n):
+            # Redifine sum_k: move current k-element array one position forward and calculate its elements sum
+            sum_k += a[i] - a[i-k]
+            # Choose current array in the loop between:
+            ans = max(ans, # Current k element array element sum
+                      sum_k, # One position forward current k element array element sum
+                      sum_k + max_left_tail_sum[i-k] # Sum best left tail of sum_k (in terms of sum of its elements)
+                     )
+    
+        return ans
+
 
 # Wrong solution because take largest sum among elements of the array
 # instead of subarray with largest sum.
