@@ -40,6 +40,25 @@ Constraints:
 All the characters of String S lies in the set {'0', '1', '2'}
 """
 
+#Second solution (0.04)
+
+class Solution:
+    def smallestSubstring(self,S):
+        min_width = 3
+        len_S = len(S)
+        if len_S < min_width:
+            return -1
+        for sum_width in range(len_S - min_width + 1):
+            window_width = 3 + sum_width
+            for start_pos in range(len_S - window_width + 1):
+                final_pos = start_pos + window_width
+                substring = S[start_pos:final_pos]
+                if ('0' in substring) and ('1' in substring) and ('2' in substring):
+                    return window_width
+                else:
+                    pass
+        return -1
+
 #First solution (2.54)
 class Solution:
     def smallestSubstring(self, S):
