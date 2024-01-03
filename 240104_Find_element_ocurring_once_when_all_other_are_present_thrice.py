@@ -71,6 +71,16 @@ class Solution:
                 dicc[ele] = 1
         rev_dic = {value:key for key,value in dicc.items()}
         return rev_dic[1]
+
+# Fourth solution (wrong because takes too much time to run)
+class Solution:
+    def singleElement(self,arr,N):
+        visited = []
+        for i in range(0,N):
+            if arr[i] not in visited:
+                if (arr[i] not in arr[i+1:]):
+                    return arr[i]
+                visited.append(arr[i])
       
 #First solution (wrong because takes too much time to run)
 class Solution:
