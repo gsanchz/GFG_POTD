@@ -38,7 +38,7 @@ Expected Time Complexity: O(N).
 Expected Auxiliary Space: O(1).
 """
 
-#Second right solution (0.33)
+#Second solution (first right sol) (0.33)
 class Solution:
     def singleElement(self,arr,N):
         arr = sorted(arr)
@@ -59,8 +59,20 @@ class Solution:
             else:
                 pass
         return arr[N-1]
+
+# Third solution (0.23)
+class Solution:
+    def singleElement(self,arr,N):
+        dicc={}
+        for ele in arr:
+            if ele in dicc:
+                dicc[ele] += 1
+            else:
+                dicc[ele] = 1
+        rev_dic = {value:key for key,value in dicc.items()}
+        return rev_dic[1]
       
-#First wrong solution (takes too much time to run)
+#First solution (wrong because takes too much time to run)
 class Solution:
     def singleElement(self,arr, N):
         def take_off(ele,arr):
