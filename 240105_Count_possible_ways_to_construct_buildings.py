@@ -45,11 +45,25 @@ Constraints:
 1 <= N <= 100000
 """
 
-#First solution (0.47)
+#First solution (0.47): Fibonacci sequence
 class Solution:
 	def TotalWays(self, N):
 	    a=1
-        b=2
-        for i in range(N-1):
-            a,b =b ,(a+b)% 1000000007
-        return (b*b) % 1000000007
+	    b=2
+            for i in range(N-1):
+	        a,b =b ,(a+b)% 1000000007
+	    return (b*b) % 1000000007
+
+# Explanation: You need two spaces to construct a building so
+# you take off K adjacent spaces to the K buildings in the N plots.
+# So, K <= N/2, otherwise there would be more blank spaces and
+# buildings than plots. In sum, this is a combinatory number:
+# C(N - K + 1, K)
+# We add 1 extra plot cause K cuts always gives one extra piece (extra place to build).
+# We sum for every K possible (1 <= K <= N/2) to get our answer.
+# The sum of each of the combinatory numbers C(N - K + 1, K) for each of the (1 <= K <= N/2)
+# is obtained through the sum of the elements of the K-th diagonal of the Pascal's Triangle.
+# In addition, K-th diagonal of the Pascal's Triangle is equal to the (K+1)-th Fibonacci-Number, so the 
+# N-th diagonal is equal to the (N+1)-th Fibonacci-Number. So sum(C(N - K + 1, K)) = (N+1)-th Fibonacci-Number.
+# That's for one side. For the other side of the road, is the same. We combine both sides (squaring)
+# to get the result. We consider first Fibonacci number 1 and second Fibonnaci number 2 and so on.
